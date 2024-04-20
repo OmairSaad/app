@@ -1,0 +1,115 @@
+<div class="navbar">
+    <h1 class="user">Hello, {{display_name}}</h1>
+    <ul>
+        <li>
+            <button type="button" class="btn btn-success mx-2" data-bs-toggle="modal"
+            data-bs-target="#exampleModal" (click)="create()">
+            Create Empl
+        </button>
+        </li>
+        <li>
+            <button (click)="erase()" class="btn btn-success">Log Out</button>
+        </li>
+    </ul>
+</div>
+
+<div class="search">
+    <input type="text" name="" id="" placeholder="Name" class="form-control col-2" [(ngModel)]="name"
+        (input)="search('name')">
+    <input type="email" placeholder="Email" class="form-control" [(ngModel)]="email" (input)="search('email')">
+
+</div>
+
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Adress</th>
+        <th scope="col">Mobile</th>
+        <th scope="col">Email</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+        @for (item of users; track $index) {
+      <tr>
+        <th scope="row">{{$index+1}}</th>
+        <td>{{item.first_name}}</td>
+        <td>{{item.last_name}}</td>
+        <td>{{item.address}}</td>
+        <td>{{item.mobile}}</td>
+        <td>{{item.email}}</td>
+        <td>{{item.gender}}</td>
+        <td>
+            <button type="button" class="btn btn-success mx-2" data-bs-toggle="modal"
+            data-bs-target="#exampleModal" (click)="edit(item)">
+            Edit
+        </button>
+        <button class="btn btn-danger" (click)="del(item)">Delete</button>
+        </td>
+      </tr>
+    } 
+    </tbody>
+  </table>
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"> {{title}} </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="" [formGroup]="employeeDetail" (ngSubmit)="send()">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="">FirstName</label>
+                        <input type="text" class="form-control" formControlName="first_name" [class]="{'red': f['first_name'].invalid && f['first_name'].touched}">
+                    </div>
+                    <div class="form-group">
+                        <label for="">lastName</label>
+                        <input type="text" class="form-control" formControlName="last_name" [class]="{'red': f['last_name'].invalid && f['last_name'].touched}">
+                    </div>
+                    <div class="form-group">
+                        <label for="">email</label>
+                        <input type="text" class="form-control" formControlName="email" [class]="{'red': f['email'].invalid && f['email'].touched}">
+                    </div>
+                    <div class="form-group">
+                        <label for="">address</label>
+                        <input type="text" class="form-control" formControlName="address" [class]="{'red': f['address'].invalid && f['address'].touched}">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Mob</label>
+                        <input type="number" class="form-control" formControlName="mobile"[class]="{'red': f['mobile'].invalid && f['mobile'].touched}" >
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <label for="">Gender</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="gender" formControlName="gender" value="Male" class="form-check-input">
+                            <label for="">Male</label>
+                        </div>
+                        <div>
+                            <input type="radio" name="gender" formControlName="gender" value="Female" class="form-check-input">
+                            <label for="">Female</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="close">Close</button>
+                    <button type="submit" class="btn btn-success" [disabled]="employeeDetail.invalid" [hidden]="show">Update</button>
+                    <button  (click)="add()" class="btn btn-primary" [disabled]="employeeDetail.invalid" [hidden]="!show">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

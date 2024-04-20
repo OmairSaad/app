@@ -1,0 +1,30 @@
+.navbar{
+    width: 100vw;
+    background-color: rgb(4, 62, 89);
+    display: flex;
+    justify-content: right;
+}
+.navbar ul li{
+    list-style: none;
+    display: inline-block;
+    padding: 20px;
+    font-size: 18px;
+    color: white;
+}
+.search{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+.search input{
+    width: 300px;
+    margin: 20px;
+}
+.red{
+    border: 1px solid red;
+}
+.user{
+    color: aquamarine;
+}
